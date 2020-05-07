@@ -1,14 +1,15 @@
-import { IonContent, IonHeader, IonPage, useIonViewDidEnter, useIonViewDidLeave,
-  useIonViewWillEnter, useIonViewWillLeave, IonIcon, IonToast } from '@ionic/react';
+import {
+  IonContent, IonHeader, IonPage, useIonViewDidEnter, useIonViewDidLeave,
+  useIonViewWillEnter, useIonViewWillLeave, IonIcon, IonToast
+} from '@ionic/react';
 import React, { useState } from 'react';
 import authService from '../services/authService';
 import userDataService from './userDataService';
 import { User } from '../_models/userModel';
-import CargodyHeader from '../_shared/CargodyHeader';
-import CargodyProgressBar from '../_shared/CargodyProgressBar';
 import { Button, TextField, Container } from '@material-ui/core';
 import { logIn } from 'ionicons/icons';
 import { LoginDto } from '../_dtos/login.dto';
+import './Login.css';
 
 const Login: React.FC = (props, context) => {
   const [token, setToken] = useState('token');
@@ -61,7 +62,7 @@ const Login: React.FC = (props, context) => {
       username: e.target.value
     });
   }
-  
+
   const onPasswordChange = (e) => {
     setLoginDto({
       ...loginDto,
@@ -93,15 +94,9 @@ const Login: React.FC = (props, context) => {
   };
 
   return (
-    <IonPage>
-      <CargodyProgressBar loading={loading}/>
-      <IonHeader>
-        <CargodyHeader>
-          Login
-        </CargodyHeader>
-      </IonHeader>
+    <IonPage className="login-page">
       <IonContent className="ion-padding">
-      <Container maxWidth="sm">
+        <div className="login-page__content">
           <form className="form__content" noValidate autoComplete="off">
             <div className="form__text-field-container">
               <TextField className="form__text-field" label="Username"
@@ -115,21 +110,21 @@ const Login: React.FC = (props, context) => {
                 value={loginDto.password || ''}
                 onChange={onPasswordChange} />
             </div>
-          <Button color="primary"
-            variant="text"
-            onClick={onLoginButtonClick}
-            startIcon={<IonIcon icon={logIn}/>}>
-            Login
+            <Button color="primary"
+              variant="text"
+              onClick={onLoginButtonClick}
+              startIcon={<IonIcon icon={logIn} />}>
+              Login
           </Button>
           </form>
-          
+
           <Button color="secondary"
             variant="text"
             onClick={onRegisterButtonClick}
-            startIcon={<IonIcon icon={logIn}/>}>
+            startIcon={<IonIcon icon={logIn} />}>
             Register
           </Button>
-        </Container>
+        </div>
         <IonToast
           isOpen={errorToast.show}
           onDidDismiss={() => showErrorToastFunction(false)}
