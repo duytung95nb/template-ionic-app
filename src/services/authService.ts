@@ -1,7 +1,9 @@
 import {BehaviorSubject } from 'rxjs';
 import { authConfig, AuthConfig } from "../_core/authConfig";
 import authDataService from './authDataService';
-import { LoginDto } from '../_dtos/login.dto';
+import { LoginDto, RegisterDto } from '../_dtos/login.dto';
+import { resolve } from 'dns';
+import { AxiosResponse } from 'axios';
 declare var window: any;
 
 class AuthService {
@@ -30,7 +32,7 @@ class AuthService {
                     this.accessTokenSubject.next(loggedInResult[this.accessTokenStorageKey]);
                 })
                 .catch((error) => {
-                    this.accessTokenSubject.next(error);
+                    this.accessTokenSubject.error(error);
                 });
             }
             else {
@@ -43,8 +45,19 @@ class AuthService {
         
     }
 
-    register(loginDto: LoginDto) {
-        return authDataService.register(loginDto);
+    register(registerDto: RegisterDto) {
+        return new Promise<AxiosResponse<any>>((res, rej) => {
+            authDataService.register(registerDto)
+                .then(result => {
+                    this.store(this.accessTokenStorageKey,
+                        result[this.accessTokenStorageKey]);
+                    this.accessTokenSubject.next(result[this.accessTokenStorageKey]);
+                    res(result);
+                })
+                .catch(err => {
+                    rej(err.response);
+                })
+        });
     }
 
     public initateLoginFlow(loginDto: LoginDto): Promise<any> {

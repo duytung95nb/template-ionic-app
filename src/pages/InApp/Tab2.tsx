@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonContent, IonHeader, IonItem, IonLabel, IonList, IonPage } from '@ionic/react';
-import CargodyHeader from '../_shared/CargodyHeader';
+import CargodyHeader from '../../_shared/CargodyHeader';
 
 const Tab2: React.FC = () => {
   return (

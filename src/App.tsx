@@ -25,9 +25,10 @@ import './theme/variables.css';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core';
 import { purple, green } from '@material-ui/core/colors';
-import Login from './pages/Login';
-import InApp from './pages/InApp';
+import Login from './pages/Auth/Login';
+import InApp from './pages/InApp/InApp';
 import { IonReactRouter } from '@ionic/react-router';
+import Register from './pages/Auth/Register';
 
 const App: React.FC = () => {
   useIonViewDidEnter(() => {
@@ -57,6 +58,7 @@ const App: React.FC = () => {
         <IonReactRouter>
           <IonRouterOutlet>
             <Route path="/login" component={Login} exact={true} />
+            <Route path="/register" component={Register} exact={true} />
             <Route path="/in-app" component={InApp} exact={true} />
             <Route exact path="/" render={() => <Redirect to="/login" />} />
           </IonRouterOutlet>

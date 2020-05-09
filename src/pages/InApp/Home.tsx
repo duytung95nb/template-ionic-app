@@ -1,11 +1,11 @@
 import { IonContent, IonHeader, IonPage, useIonViewDidEnter, useIonViewDidLeave, useIonViewWillEnter,
   useIonViewWillLeave } from '@ionic/react';
 import React, { useState } from 'react';
-import authService from '../services/authService';
-import userDataService from './userDataService';
-import { User } from '../_models/userModel';
-import CargodyHeader from '../_shared/CargodyHeader';
-import CargodyProgressBar from '../_shared/CargodyProgressBar';
+import authService from '../../services/authService';
+import userDataService from '../Auth/userDataService';
+import { User } from '../../_models/userModel';
+import CargodyHeader from '../../_shared/CargodyHeader';
+import CargodyProgressBar from '../../_shared/CargodyProgressBar';
 
 const Home: React.FC = () => {
   const [token, setToken] = useState('token');

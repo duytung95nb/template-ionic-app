@@ -1,6 +1,6 @@
-import { BaseDataService } from "../_core/baseDataService";
-import { appConstant } from "../_core/appConstant";
-import { User } from "../_models/userModel";
+import { BaseDataService } from "../../_core/baseDataService";
+import { appConstant } from "../../_core/appConstant";
+import { User } from "../../_models/userModel";
 
 
 class UserDataService extends BaseDataService {

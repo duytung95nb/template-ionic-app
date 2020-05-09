@@ -1,0 +1,10 @@
+.login-page__content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form__error {
+    color: red;
+}

@@ -1,15 +1,16 @@
 import {
-  IonContent, IonHeader, IonPage, useIonViewDidEnter, useIonViewDidLeave,
+  IonContent, IonPage, useIonViewDidEnter, useIonViewDidLeave,
   useIonViewWillEnter, useIonViewWillLeave, IonIcon, IonToast
 } from '@ionic/react';
 import React, { useState } from 'react';
-import authService from '../services/authService';
+import authService from '../../services/authService';
 import userDataService from './userDataService';
-import { User } from '../_models/userModel';
-import { Button, TextField, Container } from '@material-ui/core';
+import { User } from '../../_models/userModel';
+import { Button, TextField } from '@material-ui/core';
 import { logIn } from 'ionicons/icons';
-import { LoginDto } from '../_dtos/login.dto';
+import { LoginDto } from '../../_dtos/login.dto';
 import './Login.css';
+import { useHistory } from 'react-router';
 
 const Login: React.FC = (props, context) => {
   const [token, setToken] = useState('token');
@@ -17,17 +18,16 @@ const Login: React.FC = (props, context) => {
   const [currentUser, setCurrentUser] = useState<User>({});
   const [loading, setLoading] = useState<boolean>(false);
   const [loginDto, setLoginDto] = useState<LoginDto>(new LoginDto());
+  const history = useHistory();
 
   let errorToast = {
     show: false,
     message: ''
   }
   useIonViewDidEnter(() => {
-    console.log('Home ionViewDidEnter event fired');
   });
 
   useIonViewDidLeave(() => {
-    console.log('Home ionViewDidLeave event fired');
   });
 
   useIonViewWillEnter(() => {
@@ -71,17 +71,7 @@ const Login: React.FC = (props, context) => {
   }
 
   const onRegisterButtonClick = () => {
-    // TODO: need to implement register later and remove this
-    let mockUser = new LoginDto();
-    mockUser.username = 'tungdao95nb2';
-    mockUser.password = 'tungdao95nb';
-    authService.register(mockUser)
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    history.push('/register');
   }
   const showErrorToastFunction = (isShow: boolean) => {
     if (isShow) {
@@ -101,17 +91,17 @@ const Login: React.FC = (props, context) => {
             <div className="form__text-field-container">
               <TextField className="form__text-field" label="Username"
                 variant="outlined"
-                value={loginDto.username || ''}
+                value={loginDto.username}
                 onChange={onUsernameChange} />
             </div>
             <div className="form__text-field-container">
               <TextField className="form__text-field" label="Password"
                 variant="outlined"
-                value={loginDto.password || ''}
+                value={loginDto.password}
                 onChange={onPasswordChange} />
             </div>
             <Button color="primary"
-              variant="text"
+              variant="contained"
               onClick={onLoginButtonClick}
               startIcon={<IonIcon icon={logIn} />}>
               Login
