@@ -25,12 +25,15 @@ const Login: React.FC = (props, context) => {
     message: ''
   }
   useIonViewDidEnter(() => {
+    console.log('useIonViewWillEnter');
   });
 
   useIonViewDidLeave(() => {
+    console.log('useIonViewWillEnter');
   });
 
   useIonViewWillEnter(() => {
+    console.log('useIonViewWillEnter');
     setLoading(true);
     authService.getAccessTokenSubscription().subscribe((resultToken) => {
       setToken(resultToken);
@@ -39,7 +42,7 @@ const Login: React.FC = (props, context) => {
           setCurrentUser(userDataResult.data);
           setLoading(false);
           // Navigate to application page container
-          context.history.push('/in-app');
+          history.push('/in-app');
         })
         .catch(err => {
           console.log(err);

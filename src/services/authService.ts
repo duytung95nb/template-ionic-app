@@ -50,8 +50,8 @@ class AuthService {
             authDataService.register(registerDto)
                 .then(result => {
                     this.store(this.accessTokenStorageKey,
-                        result[this.accessTokenStorageKey]);
-                    this.accessTokenSubject.next(result[this.accessTokenStorageKey]);
+                        result.data.accessToken);
+                    this.accessTokenSubject.next(result.data.accessToken);
                     res(result);
                 })
                 .catch(err => {

@@ -62,7 +62,7 @@ const Register: React.FC = (props, context) => {
             .then(loggedInResult => {
                 setErrorRegister('');
                 setLoading(false);
-                context.history.push('/');
+                history.push('/');
             })
             .catch(error => {
                 setLoading(false);
@@ -134,12 +134,7 @@ const Register: React.FC = (props, context) => {
                                 name="passwordConfirmed"
                                 label="Password confirmed" variant="outlined"
                                 value={registerDto.passwordConfirmed || ''}
-                                onChange={onPasswordConfirmedChange}
-                                inputRef={register({
-                                    required: "Required",
-                                    validate: value => value === password.current
-                                        || "Password does not match"
-                                })}/>
+                                onChange={onPasswordConfirmedChange}/>
                             {errors.passwordConfirmed ?
                                 <div className="form__inline-error">
                                     {errors.passwordConfirmed.message}
@@ -153,13 +148,13 @@ const Register: React.FC = (props, context) => {
                             startIcon={<IonIcon icon={logIn} />}>
                             Register
                         </Button>
-                        <Button color="secondary"
-                            variant="text"
-                            onClick={onGoBackToLoginClick}
-                            startIcon={<IonIcon icon={backspace} />}>
-                            Go back to login
-                        </Button>
                     </form>
+                    <Button color="secondary"
+                        variant="text"
+                        onClick={onGoBackToLoginClick}
+                        startIcon={<IonIcon icon={backspace} />}>
+                        Go back to login
+                    </Button>
                 </div>
                 <IonToast
                     isOpen={errorToast.show}

@@ -2,13 +2,14 @@ import { BaseDataService } from "../_core/baseDataService";
 import { LoginDto } from "../_dtos/login.dto";
 import { authConfig } from "../_core/authConfig";
 import { appConstant } from "../_core/appConstant";
+import { AxiosResponse } from "axios";
 
 class AuthDataService extends BaseDataService {
     public login(loginDto: LoginDto) {
         return this.post(authConfig.loginUrl, loginDto);
     }
     public register(loginDto: LoginDto) {
-        return this.post(`${appConstant.apiUrl}/register`, loginDto);
+        return this.post<any>(`${appConstant.apiUrl}/register`, loginDto);
     }
 }
 
