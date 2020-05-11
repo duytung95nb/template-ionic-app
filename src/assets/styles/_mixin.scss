@@ -1,10 +1,7 @@
-.register-page__content {
+
+@mixin page-mixin {
     height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
-
-.register-page__error-message {
-    margin-bottom: 24px;
 }

@@ -9,7 +9,7 @@ import { User } from '../../_models/userModel';
 import { Button, TextField } from '@material-ui/core';
 import { logIn } from 'ionicons/icons';
 import { LoginDto } from '../../_dtos/login.dto';
-import './Login.css';
+import './Login.scss';
 import { useHistory } from 'react-router';
 
 const Login: React.FC = (props, context) => {

@@ -1,0 +1,12 @@
+@import '../../assets/styles/mixin';
+@import '../../assets/styles/ui-variables';
+
+.register-page {
+    &__content {
+        @include page-mixin;
+    }
+}
+
+.register-page__error-message {
+    margin-bottom: $vertical-distance;
+}

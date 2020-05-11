@@ -4,7 +4,7 @@ import { User } from '../../_models/userModel';
 import authService from '../../services/authService';
 import userDataService from '../Auth/userDataService';
 import { TextField, Container, Button } from '@material-ui/core';
-import './page.css';
+import './page.scss';
 import { save, undo } from 'ionicons/icons';
 import CargodyHeader from '../../_shared/CargodyHeader';
 import CargodyProgressBar from '../../_shared/CargodyProgressBar';

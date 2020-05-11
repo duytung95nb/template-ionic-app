@@ -21,7 +21,8 @@ import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
 /* Theme variables */
-import './theme/variables.css';
+import './assets/styles/theme/variables.scss';
+import './assets/styles/form.scss';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core';
 import { purple, green } from '@material-ui/core/colors';

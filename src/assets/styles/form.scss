@@ -1,0 +1,9 @@
+
+@import './ui-variables';
+
+.form {
+    &__inline-error {
+        margin-top: $vertical-distance-small;
+        color: var(--ion-color-danger);
+    }
+}

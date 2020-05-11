@@ -1,0 +1,7 @@
+@import '../../assets/styles/mixin';
+
+.login-page {
+    &__content  {
+        @include page-mixin;
+    }
+}

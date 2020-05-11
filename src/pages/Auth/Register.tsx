@@ -2,14 +2,15 @@ import {
     IonContent, IonPage, useIonViewDidEnter, useIonViewDidLeave,
     useIonViewWillEnter, useIonViewWillLeave, IonIcon, IonToast, IonAlert
 } from '@ionic/react';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import authService from '../../services/authService';
 import { Button, TextField } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { logIn, backspace } from 'ionicons/icons';
 import { RegisterDto } from '../../_dtos/login.dto';
-import './Register.css';
+import './Register.scss';
 import { useHistory } from 'react-router';
+import { useForm } from 'react-hook-form';
 
 const Register: React.FC = (props, context) => {
     const [errorRegister, setErrorRegister] = useState<string>('');
@@ -19,7 +20,10 @@ const Register: React.FC = (props, context) => {
     let errorToast = {
         show: false,
         message: ''
-    }
+    };
+    const { handleSubmit, register, errors, watch } = useForm();
+    const password = useRef({});
+    password.current = watch("password", "");
     useIonViewDidEnter(() => {
     });
 
@@ -95,24 +99,57 @@ const Register: React.FC = (props, context) => {
                         <div className="form__text-field-container">
                             <TextField className="form__text-field" label="Username"
                                 variant="outlined"
+                                name="username"
                                 value={registerDto.username}
-                                onChange={onUsernameChange} />
+                                onChange={onUsernameChange}
+                                inputRef={register({
+                                    minLength: {
+                                        value: 8,
+                                        message: "Username should not be less than 8 chars"
+                                    }
+                                })} />
+                            {errors.username ?
+                                <div className="form__inline-error">
+                                    {errors.username.message}
+                                </div>
+                                : ''
+                            }
                         </div>
                         <div className="form__text-field-container">
-                            <TextField className="form__text-field" label="Password"
-                                variant="outlined"
-                                value={registerDto.password}
-                                onChange={onPasswordChange} />
+                            <TextField className="form__text-field"
+                                name="password"
+                                label="Password" variant="outlined"
+                                value={registerDto.password || ''}
+                                onChange={onPasswordChange}
+                                />
+                            {errors.password ?
+                                <div className="form__inline-error">
+                                    {errors.password.message}
+                                </div>
+                                : ''
+                            }
                         </div>
                         <div className="form__text-field-container">
-                            <TextField className="form__text-field" label="Password confirmed"
-                                variant="outlined"
-                                value={registerDto.passwordConfirmed}
-                                onChange={onPasswordConfirmedChange} />
+                            <TextField className="form__text-field"
+                                name="passwordConfirmed"
+                                label="Password confirmed" variant="outlined"
+                                value={registerDto.passwordConfirmed || ''}
+                                onChange={onPasswordConfirmedChange}
+                                inputRef={register({
+                                    required: "Required",
+                                    validate: value => value === password.current
+                                        || "Password does not match"
+                                })}/>
+                            {errors.passwordConfirmed ?
+                                <div className="form__inline-error">
+                                    {errors.passwordConfirmed.message}
+                                </div>
+                                : ''
+                            }
                         </div>
                         <Button color="primary"
                             variant="contained"
-                            onClick={onRegisterButtonClick}
+                            onClick={handleSubmit(onRegisterButtonClick)}
                             startIcon={<IonIcon icon={logIn} />}>
                             Register
                         </Button>
