@@ -53,6 +53,7 @@ const Login: React.FC = (props, context) => {
   });
 
   useIonViewWillLeave(() => {
+    console.log('useIonViewWillLeave');
   });
 
   const onLoginButtonClick = () => {
