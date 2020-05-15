@@ -7,29 +7,41 @@ import Tab2 from './Tab2';
 import Details from './Details';
 import UserAccount from './UserAccount';
 import { person, apps, home } from 'ionicons/icons';
+interface InAppProps {
+  match: {
+    isExact: true
+    params: {}
+    path: "/in-app"
+    url: "/in-app"
+  }
+}
+export default class InApp extends React.Component<InAppProps> {
+  // constructor(props) {
+  //   super(props);
+  // }
 
-export default class InApp extends React.Component {
   render() {
+    const parentRoute = this.props.match.path;
     return (
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route path="/home" component={Home} exact={true} />
-            <Route path="/tab2" component={Tab2} exact={true} />
-            <Route path="/tab2/details" component={Details} />
-            <Route path="/account" component={UserAccount} />
-            <Redirect exact from="/" to="/home"  />
+            <Route exact path={`${parentRoute}`}><Home/></Route>
+            <Route path={`${parentRoute}/tab2`} component={Tab2} />
+            <Route path={`${parentRoute}/tab2/details`} component={Details} />
+            <Route path={`${parentRoute}/account`} component={UserAccount} />
+            {/* <Redirect exact from={`${parentRoute}`} to={`${parentRoute}/home`}  /> */}
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
-            <IonTabButton tab="home" href="/home">
+            <IonTabButton tab="home" href={`${parentRoute}/home`}>
               <IonIcon icon={home} />
               <IonLabel>Home</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="tab2" href="/tab2">
+            <IonTabButton tab="tab2" href={`${parentRoute}/tab2`}>
               <IonIcon icon={apps} />
               <IonLabel>Tab Two</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="account" href="/account">
+            <IonTabButton tab="account" href={`${parentRoute}/account`}>
               <IonIcon icon={person} />
               <IonLabel>Account</IonLabel>
             </IonTabButton>

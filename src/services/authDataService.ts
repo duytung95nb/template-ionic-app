@@ -6,7 +6,7 @@ import { AxiosResponse } from "axios";
 
 class AuthDataService extends BaseDataService {
     public login(loginDto: LoginDto) {
-        return this.post(authConfig.loginUrl, loginDto);
+        return this.post<any>(authConfig.loginUrl, loginDto,);
     }
     public register(loginDto: LoginDto) {
         return this.post<any>(`${appConstant.apiUrl}/register`, loginDto);

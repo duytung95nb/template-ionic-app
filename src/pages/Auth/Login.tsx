@@ -26,6 +26,13 @@ const Login: React.FC = (props, context) => {
   }
   useIonViewDidEnter(() => {
     console.log('useIonViewWillEnter');
+    authService.getAccessTokenSubscription().subscribe((resultToken) => {
+      if(!resultToken) { return; }
+      setToken(resultToken);
+      history.replace('/');
+    }, (err) => {
+      setErrorToken(err);
+    });
   });
 
   useIonViewDidLeave(() => {
@@ -34,22 +41,6 @@ const Login: React.FC = (props, context) => {
 
   useIonViewWillEnter(() => {
     console.log('useIonViewWillEnter');
-    setLoading(true);
-    authService.getAccessTokenSubscription().subscribe((resultToken) => {
-      setToken(resultToken);
-      userDataService.getUserInfo()
-        .then((userDataResult) => {
-          setCurrentUser(userDataResult.data);
-          setLoading(false);
-          // Navigate to application page container
-          history.push('/in-app');
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }, (err) => {
-      setErrorToken(err);
-    });
   });
 
   useIonViewWillLeave(() => {

@@ -63,8 +63,8 @@ class AuthService {
     public initateLoginFlow(loginDto: LoginDto): Promise<any> {
         return new Promise((resolve, reject) => {
             authDataService.login(loginDto)
-                .then((accessToken) => {
-                    resolve(accessToken);
+                .then((loginResult) => {
+                    resolve(loginResult.data.accessToken);
                 })
                 .catch((error) => {
                     console.log(error);

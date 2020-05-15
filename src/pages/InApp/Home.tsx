@@ -21,20 +21,29 @@ const Home: React.FC = () => {
   });
 
   useIonViewWillEnter(() => {
-    setLoading(true);
-    authService.getAccessTokenSubscription().subscribe((resultToken) => {
-      setToken(resultToken);
-      userDataService.getUserInfo()
+    userDataService.getUserInfo()
         .then((userDataResult) => {
           setCurrentUser(userDataResult.data);
           setLoading(false);
+          // Navigate to application page container
         })
         .catch(err => {
           console.log(err);
         });
-    }, (err) => {
-      setErrorToken(err);
-    });
+    // setLoading(true);
+    // authService.getAccessTokenSubscription().subscribe((resultToken) => {
+    //   setToken(resultToken);
+    //   userDataService.getUserInfo()
+    //     .then((userDataResult) => {
+    //       setCurrentUser(userDataResult.data);
+    //       setLoading(false);
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+    // }, (err) => {
+    //   setErrorToken(err);
+    // });
   });
 
   useIonViewWillLeave(() => {
